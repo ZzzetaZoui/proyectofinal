@@ -21,8 +21,8 @@ def buscarLibros(request):
 def buscar(request):
     if request.GET["titulo"]:
         buscar = request.GET["titulo"]
-        pelis = Libros.objects.filter(titulo__icontains=buscar)
-        return render(request, "LibrosApp/resultados.html", {"pelis":pelis, "buscar":buscar})
+        Libros = Libros.objects.filter(titulo__icontains=buscar)
+        return render(request, "LibrosApp/resultados.html", {"Libros":Libros, "buscar":buscar})
     else:
         mensaje = "No enviaste datos."
     return HttpResponse(mensaje)

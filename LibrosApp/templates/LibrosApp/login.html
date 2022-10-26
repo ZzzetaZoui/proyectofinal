@@ -1,6 +1,6 @@
 
 
-{% extends 'LibroApp/padre.html' %}
+{% extends 'LibrosApp/padre.html' %}
 
 {%load static%}
 
@@ -8,7 +8,7 @@
 
     <form action="" method="post">
         {% csrf_token %}
-        {{formulario1.as_p}}
+        {{ingresar.as_p}}
         <button type="submit">Iniciar Sesión</button> 
     </form>
 

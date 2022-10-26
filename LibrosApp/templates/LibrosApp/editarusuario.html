@@ -1,4 +1,4 @@
-{% extends 'libroApp/padre.html' %}
+{% extends 'LibrosApp/padre.html' %}
 
 {%load static%}
 
@@ -6,7 +6,7 @@
 
 <form action="" enctype="multipart/form-data" method="POST"> {% csrf_token %}
     <table margin="center">
-        {{editar.as_table}}
+        {{usuarioForm.as_table}}
     </table>
     <input type="submit" value="Confirmar" class="botonform">
 </form>

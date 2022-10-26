@@ -1,4 +1,4 @@
-{% extends 'libroApp/padre.html' %}
+{% extends 'LibrosApp/padre.html' %}
 
 {%load static%}
 
@@ -14,7 +14,7 @@
 <body>
     <form action="" method="post">
         {% csrf_token %}
-        {{formulario2.as_p}}
+        {{registrar.as_p}}
         <button type="submit">REGISTRAR</button> 
     </form>
 </body>
