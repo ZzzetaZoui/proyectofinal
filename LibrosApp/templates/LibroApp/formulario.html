@@ -1,0 +1,17 @@
+{% extends 'libroApp/padre.html' %}
+
+{%load static%}
+
+{% block contenido1 %}
+
+
+<form action="" enctype="multipart/form-data" method="POST"> {% csrf_token %}
+    <table style="align-content: center;">
+        {{postear.as_table}}
+    </table>
+    <input type="submit" value="aceptar" class="botonform">
+</form>
+
+
+
+{% endblock %}

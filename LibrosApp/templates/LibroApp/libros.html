@@ -1,0 +1,35 @@
+{% extends 'libroApp/padre.html' %}
+
+{%load static%}
+
+{% block contenido1 %}
+    <H1>¡Bienvenidos a los libros y escritos!</H1>
+    <section>
+        {% for elemento in libros %}
+        <article>
+            <h3>
+                {{elemento.nombreLibro}}
+            </h3>
+            <p>
+                {{elemento.descripcion}}
+            </p>
+            <img src="{{elemento.imagen}}">
+            <footer>
+                {{elemento.autor}}
+            </footer>
+            {% if user.id == p.user.id %}
+                <div class="btn-group" role="group" aria-label="Basic outlined example">
+                    <button type="button" class="btn btn-outline-primary btn-sm"><a href="{% url 'editarLibro' p.titulo %}" style="text-decoration: none;">Editar</a></button>
+                    <button type="button" class="btn btn-outline-primary btn-sm"><a href="{% url 'eliminarLibro' p.titulo %}" style="text-decoration: none;">Eliminar</a></button>
+                </div>
+                {% endif %}
+                <div class="btn-group" role="group" aria-label="Basic outlined example">
+                <button type="button" class="btn btn-outline-primary btn-sm"><a href="{% url 'detallePost' p.id %}" style="text-decoration: none;">Detalle</a></button>
+                </div>
+            </article>
+        {% endfor %}
+    </section>
+</body>
+</html>
+{% endblock %}
+

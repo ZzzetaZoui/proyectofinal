@@ -1,0 +1,16 @@
+{% extends 'libroApp/padre.html' %}
+
+{%load static%}
+
+{% block contenido1 %}
+
+<div class="c3">
+    <form action="" enctype="multipart/form-data" method="POST"> {% csrf_token %}
+        <table align="center">
+            {{avatarForm.as_table}}
+        </table>
+        <input type="submit" value="Subir imagen" class="botonform">
+    </form>
+</div>
+
+{% endblock %}

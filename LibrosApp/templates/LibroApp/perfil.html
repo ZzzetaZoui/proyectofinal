@@ -1,0 +1,24 @@
+{% extends 'libroApp/padre.html' %}
+
+{%load static%}
+
+{% block contenido1 %}
+
+<div class="main">
+    <div class="profile">
+        {% if request.user.is_authenticated %}
+            {% with first_image=user.avatar_set.first %}
+                {% if first_image %}
+                    <a href="{{ first_image.imagen.url }}" target="_blank"></a>
+                    <img src="{{ first_image.imagen.url }}">
+                {% else %}
+                    <a href="{% static 'LibroApp/assets/img/blank.png' %}" target="_blank"></a>
+                    <img src="{% static 'LibroApp/assets/img/blank.png' %}"/>
+                {% endif %}
+            {% endwith %}
+        {% endif %}
+        <h2>{{ user }}</h2>
+    </div>
+</div>
+
+{% endblock %}

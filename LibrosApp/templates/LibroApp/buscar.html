@@ -1,0 +1,15 @@
+{% extends 'libroApp/padre.html' %}
+
+{%load static%}
+
+{% block contenido1 %}
+
+<section>
+    <form action="/LibrosApp/resultados/" method="GET">
+        <input type="text" name="nombreLibro" id="nombreLibro" placeholder="Título">
+        <input type="submit" value="Buscar">
+    </form>
+</section>
+
+
+{% endblock %}
