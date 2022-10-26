@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from .models import Avatar, Libros, Comentar
+import datetime
 
 class RegistroForm(UserCreationForm):
     email = forms.EmailField(widget=forms.TextInput(attrs={"placeholder":"Ingrese un correo"}), label="")
@@ -50,7 +51,7 @@ class MyAuthenticationForm(AuthenticationForm):
 class LibrosForm(forms.ModelForm):
     nombreLibro = forms.CharField(widget=forms.TextInput(attrs={"placeholder":"Título"}), label="")
     genero = forms.CharField(widget=forms.TextInput(attrs={"placeholder":"Genero"}), label="")
-    anio = forms.IntegerField(widget=forms.TextInput(attrs={"placeholder":"Año"}), label="")
+    anio = forms.CharField(widget=forms.TextInput(attrs={"placeholder":"Año de creacion"}), label="")
     autor = forms.CharField(widget=forms.TextInput(attrs={"placeholder":"Autor"}), label="")
     capitulos = forms.IntegerField(widget=forms.NumberInput(attrs={"placeholder":"Capitulos"}), label="")
     descripcion = forms.CharField(label="", widget=forms.Textarea(attrs={"rows":2, "placeholder":"Escribe aquí"}), required=True)
