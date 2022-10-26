@@ -105,7 +105,7 @@ def postear(request):
         if posteo.is_valid():
             post = posteo.save(commit=False)
             post.user = current_user
-            post.save()
+            #posteo.save()
             messages.success(request, "Publicación enviado con éxito")
             return render(request, "LibrosApp/padre.html")
     else:
