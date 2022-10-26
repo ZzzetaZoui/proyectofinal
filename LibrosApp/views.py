@@ -1,8 +1,10 @@
+#from typing_extensions import Self
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import *
 from .forms import *
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login as auth_login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.detail import DetailView
 from django.contrib.auth.decorators import login_required
@@ -35,7 +37,7 @@ def login(request):
             contra = ingresar.cleaned_data.get("password")
             user = authenticate(username = usuario, password = contra)
             if user:
-                login(request, user)
+                #login(request, user)
                 return render(request, "LibrosApp/inicio.html",{"mensaje":f"hola {user}"})
         else:
             return render(request, "LibrosApp/inicio.html",{"mensaje":f"Datos incorrectos"})
