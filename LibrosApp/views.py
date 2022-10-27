@@ -61,9 +61,9 @@ def register(request):
 def editarUsuario(request):
     userConect = request.user
     if request.method == "POST":
-        usuarioform = EditarUsuarioForm(request.POST)
-        if usuarioform.is_valid():
-            info = usuarioform.cleaned_data
+        usuarioForm = EditarUsuarioForm(request.POST)
+        if usuarioForm.is_valid():
+            info = usuarioForm.cleaned_data
             userConect.username = info["username"]
             userConect.email = info["email"]
             userConect.password1 = info["password1"]
@@ -71,8 +71,8 @@ def editarUsuario(request):
             userConect.save()
             return render(request, "LibrosApp/inicio.html")
     else:
-        usuarioform = EditarUsuarioForm(initial={"email": userConect.email})
-    return render(request, "LibrosApp/editarusuario.html", {"userEdit":usuarioform, "userOn":userConect})
+        usuarioForm = EditarUsuarioForm(initial={"email": userConect.email})
+    return render(request, "LibrosApp/editarusuario.html", {"userEdit":usuarioForm, "userOn":userConect})
 
 @login_required
 def agregarAvatar(request):
@@ -105,7 +105,7 @@ def postear(request):
         if posteo.is_valid():
             post = posteo.save(commit=False)
             post.user = current_user
-            #posteo.save()
+            posteo.save()
             messages.success(request, "Publicación enviado con éxito")
             return render(request, "LibrosApp/padre.html")
     else:

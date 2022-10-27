@@ -10,7 +10,7 @@ urlpatterns = [
     path("login/", login, name = "login"),
     path("register/", register, name = "register"),
     path("logout", LogoutView.as_view(template_name="LibrosApp/inicio.html"), name = "salir"),
-    path("editarUser", editarUsuario, name = "editUser"),
+    path("editarUsuario/", editarUsuario, name = "editUser"),
     path("agregarAvatar/", login, name="agregarAvatar/"),
     path("perfil/", perfil, name = "perfill"),
     path('detallePost/<int:pk>/', detallePost.as_view(), name='detallePost'),
