@@ -54,7 +54,8 @@ class LibrosForm(forms.ModelForm):
     anio = forms.CharField(widget=forms.TextInput(attrs={"placeholder":"Año de creacion"}), label="")
     autor = forms.CharField(widget=forms.TextInput(attrs={"placeholder":"Autor"}), label="")
     capitulos = forms.IntegerField(widget=forms.NumberInput(attrs={"placeholder":"Capitulos"}), label="")
-    descripcion = forms.CharField(label="", widget=forms.Textarea(attrs={"rows":2, "placeholder":"Escribe aquí"}), required=True)
+    descripcion = forms.CharField(label="", widget=forms.Textarea(attrs={"rows":2, "placeholder":"Escribe aquí una descripción o escritura"}), required=True)
+    imagen = forms.URLField(widget=forms.URLInput(attrs={"placeholder":"URL de tu imagen"}), label="")
 
     class Meta:
         model = Libros

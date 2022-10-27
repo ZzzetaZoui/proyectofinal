@@ -5,7 +5,7 @@
 {% block contenido1 %}
     <H1>¡Bienvenidos a los libros y escritos!</H1>
     <section>
-        {% for elemento in libros %}
+        {% for elemento in posts %}
         <article>
             <h3>
                 {{elemento.nombreLibro}}
@@ -13,7 +13,7 @@
             <p>
                 {{elemento.descripcion}}
             </p>
-            <img src="{{elemento.imagen}}">
+            <img src="{{elemento.imagen}}" height="300">
             <footer>
                 {{elemento.autor}}
             </footer>
@@ -23,9 +23,7 @@
                     <button type="button" class="btn btn-outline-primary btn-sm"><a href="{% url 'eliminarLibro' p.titulo %}" style="text-decoration: none;">Eliminar</a></button>
                 </div>
                 {% endif %}
-                <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <button type="button" class="btn btn-outline-primary btn-sm"><a href="{% url 'detallePost' p.id %}" style="text-decoration: none;">Detalle</a></button>
-                </div>
+
             </article>
         {% endfor %}
     </section>

@@ -29,7 +29,7 @@ def buscar(request):
         mensaje = "No enviaste datos."
     return HttpResponse(mensaje)
 
-def login(request):
+def loginUsuario(request):
     if request.method == "POST":
         ingresar = MyAuthenticationForm(request, data = request.POST)
         if ingresar.is_valid():
@@ -37,7 +37,7 @@ def login(request):
             contra = ingresar.cleaned_data.get("password")
             user = authenticate(username = usuario, password = contra)
             if user:
-                #login(request, user)
+                #loginUsuario(request, user)
                 return render(request, "LibrosApp/inicio.html",{"mensaje":f"hola {user}"})
         else:
             return render(request, "LibrosApp/inicio.html",{"mensaje":f"Datos incorrectos"})
