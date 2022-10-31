@@ -1,15 +1,13 @@
-{% extends 'LibrosApp/padre.html' %}
+{% extends 'LibrosApp/padrevista.html' %}
 
 {%load static%}
 
-{% block contenido1 %}
+{% block vista %}
 
-<div class="c3">
+<div>
     <form action="" enctype="multipart/form-data" method="POST"> {% csrf_token %}
-        <table align="center">
             {{avatarForm.as_table}}
-        </table>
-        <input type="submit" value="Subir imagen" class="botonform">
+            <button class="boton-perfil" type="submit">Subir imagen</button>
     </form>
 </div>
 

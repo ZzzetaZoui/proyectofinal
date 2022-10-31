@@ -1,15 +1,14 @@
 
 
-{% extends 'LibrosApp/padre.html' %}
+{% extends 'LibrosApp/padreform.html' %}
 
 {%load static%}
 
-{% block contenido1 %}
+{% block contenidoform %}
 
-    <form action="" method="post">
-        {% csrf_token %}
+    <form class="caja-form" action="" method="post">{% csrf_token %}
         {{ingresar.as_p}}
-        <button type="submit">Iniciar Sesión</button> 
+        <button class="boton" type="submit">Iniciar Sesión</button> 
     </form>
 
 

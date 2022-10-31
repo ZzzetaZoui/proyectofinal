@@ -1,14 +1,14 @@
-{% extends 'LibrosApp/padre.html' %}
+{% extends 'LibrosApp/padrevista.html' %}
 
 {%load static%}
 
-{% block contenido1 %}
+{% block vista %}
 
 <form action="" enctype="multipart/form-data" method="POST"> {% csrf_token %}
-    <table margin="center">
-        {{usuarioForm.as_table}}
+    <table>
+        {{userEdit.as_table}}
     </table>
-    <input type="submit" value="Confirmar" class="botonform">
+    <input type="submit" value="Confirmar" class="boton-perfil">
 </form>
 
 {% endblock %}

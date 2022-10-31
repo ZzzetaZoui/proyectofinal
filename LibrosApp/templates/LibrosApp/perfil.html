@@ -1,8 +1,8 @@
-{% extends 'LibrosApp/padre.html' %}
+{% extends 'LibrosApp/padrevista.html' %}
 
 {%load static%}
 
-{% block contenido1 %}
+{% block vista %}
 
 <div class="main">
     <div class="profile">
@@ -12,8 +12,8 @@
                     <a href="{{ first_image.imagen.url }}" target="_blank"></a>
                     <img src="{{ first_image.imagen.url }}">
                 {% else %}
-                    <a href="{% static 'LibroApp/assets/img/blank.png' %}" target="_blank"></a>
-                    <img src="{% static 'LibroApp/assets/img/blank.png' %}"/>
+                    <a href="{% static 'LibroApp/assets/img/blank.jpg' %}" target="_blank"></a>
+                    <img src="{% static 'LibroApp/assets/img/blank.jpg' %}"/>
                 {% endif %}
             {% endwith %}
         {% endif %}

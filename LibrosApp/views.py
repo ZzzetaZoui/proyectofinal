@@ -1,16 +1,14 @@
 #from typing_extensions import Self
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import *
 from .forms import *
-from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth import login as auth_login
+from django.contrib.auth import login, authenticate
+from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.detail import DetailView
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
 
 def inicio(request):
     return render(request, "LibrosApp/inicio.html")
@@ -23,8 +21,8 @@ def buscarLibros(request):
 def buscar(request):
     if request.GET["titulo"]:
         buscar = request.GET["titulo"]
-        Libros = Libros.objects.filter(titulo__icontains=buscar)
-        return render(request, "LibrosApp/resultados.html", {"Libros":Libros, "buscar":buscar})
+        libros = Libros.objects.filter(nombreLibro__icontains=buscar)
+        return render(request, "LibrosApp/resultados.html", {"libros":libros, "buscar":buscar})
     else:
         mensaje = "No enviaste datos."
     return HttpResponse(mensaje)
@@ -37,7 +35,7 @@ def loginUsuario(request):
             contra = ingresar.cleaned_data.get("password")
             user = authenticate(username = usuario, password = contra)
             if user:
-                #loginUsuario(request, user)
+                login(request, user)
                 return render(request, "LibrosApp/inicio.html",{"mensaje":f"hola {user}"})
         else:
             return render(request, "LibrosApp/inicio.html",{"mensaje":f"Datos incorrectos"})
@@ -114,43 +112,33 @@ def postear(request):
 
 @login_required
 def editarPost(request, Posteo):
-    editar = Libros.objects.get(titulo = Posteo)
+    editar = Libros.objects.get(nombreLibro = Posteo)
     if request.method == "POST":
         postEditar = LibrosForm(request.POST, request.FILES)
         if postEditar.is_valid():
             info = postEditar.cleaned_data
             editar.imagen = info["imagen"]
-            editar.titulo = info["titulo"]
+            editar.nombreLibro = info["nombreLibro"]
             editar.genero = info["genero"]
             editar.anio = info["anio"]
-            editar.content = info["content"]
+            editar.descripcion = info["descripcion"]
             editar.save()
             messages.success(request, "Publicación editada con éxito")
             return render(request, "LibrosApp/libros.html")
     else:
-        postEditar = LibrosForm(initial={"imagen": editar.imagen, "titulo": editar.titulo, "genero": editar.genero, "anio": editar.anio, "content": editar.content})
+        postEditar = LibrosForm(initial={"imagen": editar.imagen, "nombreLibro": editar.nombreLibro, "genero": editar.genero, "anio": editar.anio, "descripcion": editar.descripcion})
     return render(request, "LibrosApp/editarlibros.html", {"editar":postEditar, "nombre":Posteo})
 
 @login_required
 def eliminarPost(request, Posteo):
-    eliminar = Libros.objects.get(titulo = Posteo)
+    eliminar = Libros.objects.get(nombreLibro = Posteo)
     eliminar.delete()
-    titulos = Libros.objects.all()
-    contexto = {"titulos":titulos}
-    return render(request, "LibrosApp/eliminarlibro.html", contexto)
+    nombreLibros = Libros.objects.all()
+    contexto = {"nombreLibros":nombreLibros}
+    return render(request, "LibrosApp/inicio.html", contexto)
 
-class detallePost(LoginRequiredMixin, DetailView):
+class detalleLibro(LoginRequiredMixin, DetailView):
     model = Libros
-    context_object_name = 'detallePost'
-    template_name = 'LibrosApp/postDetalle.html'
+    context_object_name = 'verlibro'
+    template_name = 'LibrosApp/detallelibro.html'
 
-class ComentarioPagina(LoginRequiredMixin, CreateView):
-    model = Comentar
-    form_class = ComentarForm
-    context_object_name = 'comentario'
-    template_name = 'LibrosApp/comentariolibro.html'
-    success_url = reverse_lazy('padre')
-
-    def form_valid(self, form):
-        form.instance.comentario_id = self.kwargs['pk']
-        return super(ComentarioPagina, self).form_valid(form)

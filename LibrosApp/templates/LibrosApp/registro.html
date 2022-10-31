@@ -1,8 +1,8 @@
-{% extends 'LibrosApp/padre.html' %}
+{% extends 'LibrosApp/padreform.html' %}
 
 {%load static%}
 
-{% block contenido1 %}
+{% block contenidoform %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,10 +12,9 @@
     <title>REGISTER</title>
 </head>
 <body>
-    <form action="" method="post">
-        {% csrf_token %}
+    <form class="caja-form" action="" method="post">{% csrf_token %}
         {{registrar.as_p}}
-        <button type="submit">REGISTRAR</button> 
+        <button class="boton" type="submit">Registrar</button> 
     </form>
 </body>
 </html>

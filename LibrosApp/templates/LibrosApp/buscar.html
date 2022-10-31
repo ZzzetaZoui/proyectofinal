@@ -1,13 +1,13 @@
-{% extends 'LibrosApp/padre.html' %}
+{% extends 'LibrosApp/padreform.html' %}
 
 {%load static%}
 
-{% block contenido1 %}
+{% block contenidoform %}
 
 <section>
-    <form action="/LibrosApp/resultados/" method="GET">
-        <input type="text" name="nombreLibro" id="nombreLibro" placeholder="Título">
-        <input type="submit" value="Buscar">
+    <form class="caja-form" action="/LibrosApp/resultados/" method="GET">
+        <input class="bcar-input" type="text" name="titulo" id="titulo" placeholder="Título">
+        <button class="boton-perfil" type="submit">Buscar</button>
     </form>
 </section>
 

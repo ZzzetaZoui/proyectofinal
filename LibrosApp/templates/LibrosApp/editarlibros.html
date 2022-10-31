@@ -1,14 +1,12 @@
-{% extends 'LibrosApp/padre.html' %}
+{% extends 'LibrosApp/padreform.html' %}
 
 {%load static%}
 
-{% block contenido1 %}
+{% block contenidoform %}
 
-<form action="" enctype="multipart/form-data" method="POST"> {% csrf_token %}
-    <table margin="center">
-        {{LibrosForm.as_table}}
-    </table>
-    <input type="submit" value="Confirmar" class="botonform">
+<form class="caja-form-libros" action="" enctype="multipart/form-data" method="POST"> {% csrf_token %}
+    {{editar.as_p}}
+    <button class="boton" type="submit">Confirmar</button> 
 </form>
 
 {% endblock %}

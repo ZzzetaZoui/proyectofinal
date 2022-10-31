@@ -47,28 +47,28 @@
                 <li><p class="justify-content-md-end"> {{user}} </p></li>
                 {% endif %}
             </ul>
-            
         </header>
         <!-- Header-->
-        <header class="masthead d-flex align-items-center">
-            <div class="container px-4 px-lg-5 text-center">
-                <h1 class="mb-1">LIBRERÍA DIGITAL</h1>
-                <h3 class="mb-5"><em>Tienda digital - Repartimos por todo el MUNDO</em></h3>
-                <a class="btn btn-primary btn-xl" href="#about">MÁS INFORMACIÓM</a>
-            </div>
-        </header>
-        <section class="content-section bg-light" id="about">
-            <div class="container px-4 px-lg-5 text-center">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-lg-10">
-
-                        {% block contenido1 %}
-                        {% endblock %}
-                    
+        <header class="libros-fondo d-flex align-items-center">
+            <div class="container px-4 px-lg-5 text-center m-auto">
+                <div class="lg:flex justify-center lg:space-x-10 lg:space-y-0 space-y-5">
+                    <div class=" centro-perfil -mx-2 lg:mx-0">
+                        {% if verlibro.imagen %}
+                            <p><img class="imagenPost" src="{{verlibro.imagen}}" alt=""></p>
+                        {% endif %}
+                    </div>
+                    <div class="lg:w-5/12">
+                        <div class="">
+                            <p><h4>{{verlibro.nombreLibro}}</h4></p>
+                            <p>Genero: {{verlibro.genero}}</p>
+                            <p>Año: {{verlibro.anio}}</p>
+                            <p>Capitulos: {{verlibro.capitulos}}</p>
+                            <p class="cuadro-texto">{{verlibro.descripcion}}</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </header>
         <!-- Footer-->
         <footer class="footer text-center">
             <div class="container px-4 px-lg-5">

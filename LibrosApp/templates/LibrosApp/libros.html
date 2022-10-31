@@ -1,33 +1,109 @@
-{% extends 'LibrosApp/padre.html' %}
-
-{%load static%}
-
-{% block contenido1 %}
-    <H1>¡Bienvenidos a los libros y escritos!</H1>
-    <section>
-        {% for elemento in posts %}
-        <article>
-            <h3>
-                {{elemento.nombreLibro}}
-            </h3>
-            <p>
-                {{elemento.descripcion}}
-            </p>
-            <img src="{{elemento.imagen}}" height="300">
-            <footer>
-                {{elemento.autor}}
-            </footer>
-            {% if user.id == p.user.id %}
-                <div class="btn-group" role="group" aria-label="Basic outlined example">
-                    <button type="button" class="btn btn-outline-primary btn-sm"><a href="{% url 'editarLibro' p.titulo %}" style="text-decoration: none;">Editar</a></button>
-                    <button type="button" class="btn btn-outline-primary btn-sm"><a href="{% url 'eliminarLibro' p.titulo %}" style="text-decoration: none;">Eliminar</a></button>
-                </div>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {%load humanize%}
+        {%load static%}
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Mundo Libro</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{% static 'LibroApp/assets/favicon.ico'%}" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Simple line icons-->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css" rel="stylesheet" />
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'LibroApp/css/styles.css'%}" rel="stylesheet" />
+        <link href="{% static 'LibroApp/css/estilos.css'%}" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <header>
+            <ul class="menu">
+                <li><a href="{% url 'inicio' %}">Inicio</a></li>
+                <li><a href="{% url 'libros' %}">Libros</a></li>
+                <li><a href="{% url 'librosposts' %}">Publicar</a></li>
+                <li><a href="{% url 'buscar' %}">Buscar</a></li>
+                <li><a href="{% url 'perfill' %}">Perfil</a></li>
+                {% if request.user.is_authenticated %}
+                <li><a href="{% url 'salir' %}">Cerrar Sesión</a></li>
+                {% else %}
+                <li><a href="{% url 'login' %}">login</a></li>
+                <li><a href="{% url 'register' %}">Registrarse</a></li>
                 {% endif %}
-
-            </article>
-        {% endfor %}
-    </section>
-</body>
+                {% if request.user.is_authenticated %}
+                {% with first_image=user.avatar_set.first %}
+                {% if first_image %}
+                <li><a href="{{ first_image.imagen.url }}" target="_blank"></a></li>
+                <li><img style="border-radius: 50%;" src="{{ first_image.imagen.url }}" height="60px"></li>
+                {% else %}
+                <li><a style="border-radius: 50%;" href="{% static 'LibroApp/assets/img/blank.jpg' %}" target="_blank"></a></li>
+                <li><img style="border-radius: 50%;" src="{% static 'AppCoder/assets/img/blank.jpg' %}" height="60px" /></li>
+                {% endif %}
+                {% endwith %}
+                <li class="dimg"><p>{{user}} </p></li>
+                {% endif %}
+            </ul>
+        </header>
+        <!-- Header-->
+        <header class="libros-fondo d-flex align-items-center">
+            <div class="container px-4 px-lg-5 text-center">
+                <section>
+                    <H1 style="margin-bottom: 4rem; font-size: 4rem;">¡Bienvenidos a los libros y escritos!</H1>
+                    {% for elemento in posts %}
+                    <article style="border-bottom: 2px solid #696969; border-top: 2px solid #696969;">
+                        <h3>
+                            {{elemento.nombreLibro}}
+                        </h3>
+                        <p>
+                            {{elemento.descripcion}}
+                        </p>
+                        <img src="{{elemento.imagen}}" height="300">
+                        <footer>
+                            {{elemento.autor}}
+                        </footer>
+                        <time data-time="#">{{ elemento.fecha_creacion|naturaltime }}</time>
+                        <br>
+                        {% if user.id == elemento.user.id %}
+                            <div class="btns" role="group" aria-label="Basic outlined example">
+                                <button type="button" class="btn-lib"><a href="{% url 'editarlibro' elemento.nombreLibro %}" class="btn-tag">Editar</a></button>
+                                <button type="button" class="btn-lib"><a href="{% url 'eliminarlibro' elemento.nombreLibro %}" class="btn-tag">Eliminar</a></button>
+                            </div>
+                        {% endif %}
+                        <div class="btns" role="group" aria-label="Basic outlined example">
+                            <button type="button" class="btn-lib"><a href="{% url 'detallelibro' elemento.id %}" class="btn-tag">Detalle</a></button>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </section>
+            </div>
+        </header>
+        <!-- Footer-->
+        <footer class="footer text-center">
+            <div class="container px-4 px-lg-5">
+                <ul class="list-inline mb-5">
+                    <li class="list-inline-item">
+                        <a class="social-link rounded-circle text-white mr-3" href="#!"><i class="icon-social-facebook"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="social-link rounded-circle text-white mr-3" href="#!"><i class="icon-social-twitter"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="social-link rounded-circle text-white" href="https://github.com/ZzzetaZoui"><i class="icon-social-github"></i></a>
+                    </li>
+                </ul>
+                <p class="text-muted small mb-0">zoe Banfi - Micaela Delanoe - 2022</p>
+            </div>
+        </footer>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top"><i class="fas fa-angle-up"></i></a>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
 </html>
-{% endblock %}
-

@@ -35,17 +35,3 @@ class Libros(models.Model):
     def __str__(self):
         return f'{self.user.username}: {self.nombreLibro}: {self.genero}'
 
-class Comentar(models.Model):
-    comentario = models.ForeignKey(Libros, on_delete=models.CASCADE, related_name='comentarios', null=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='usuario', null=True)
-    imagen = models.ImageField(default='', null=True, blank=True)
-    timecoment = models.DateTimeField(default=timezone.now)
-    mensaje = models.TextField(null=True, blank=True)
-
-    class Meta:
-        ordering = ['-timecoment']
-        verbose_name = "Comentario"
-        verbose_name_plural = "Comentarios"
-
-    def __str__(self):
-        return f'{self.user.username}'

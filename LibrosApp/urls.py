@@ -11,10 +11,9 @@ urlpatterns = [
     path("register/", register, name = "register"),
     path("logout", LogoutView.as_view(template_name="LibrosApp/inicio.html"), name = "salir"),
     path("editarUsuario/", editarUsuario, name = "editUser"),
-    path("agregarAvatar/", agregarAvatar, name="agregarAvatar/"),
+    path("agregarAvatar/", agregarAvatar, name="agregarAvatar"),
     path("perfil/", perfil, name = "perfill"),
-    path('detallePost/<int:pk>/', detallePost.as_view(), name='detallePost'),
-    path('detallePost/<int:pk>/comentar/', ComentarioPagina.as_view(), name='comentario'),
+    path('detallelibro/<int:pk>/', detalleLibro.as_view(), name='detallelibro'),
     
     #CRUD
     path("libros/", posts, name = "libros"),
